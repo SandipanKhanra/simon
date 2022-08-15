@@ -27,10 +27,22 @@ $(".btn").click(function() {
 
   //Play sound correspomding to the colour
   playSound(userChosenColour);
+
+  animatePress(userChosenColour);
 })
 
 
 function playSound(name){
   var audio = new Audio("sounds/" + name + ".mp3");
   audio.play();
+}
+
+function animatePress(currentColour){
+  // Add the css class "pressed" to the current button
+  $("#"+currentColour).addClass("pressed");
+
+// After 100 miliseconds remove the "pressed" class
+  setInterval(function(){
+    $("#"+currentColour).removeClass("pressed")
+  },100);
 }
