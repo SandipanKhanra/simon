@@ -1,5 +1,6 @@
 var buttonColours = ["red", "blue", "yellow", "green"];
 var gamePattern = [];
+var userClickedPattern = [];
 
 function nextSequence() {
   var randomNumber = Math.floor(Math.random() * 4);
@@ -8,6 +9,20 @@ function nextSequence() {
   gamePattern.push(randomChosenColour);
   // Jquery to select id $("#idName")
   $("#" + randomChosenColour).fadeOut().fadeIn();
-  var audio = new Audio("sounds/"+randomChosenColour+".mp3");
+  var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
   audio.play();
 }
+
+// Use jQuery to trigger a call back function when a button is clicked and store the id
+$(".btn").click(function() {
+  // console.log(event);
+  //When ever an event occurs browser will create by deafult event object which we can access inside the callback function
+  // so we have to name this object inside the parameter list of funcion like "event" or "e"
+  // var userChosenColour = event.target.id;
+
+  // We can also use "this" keyword to refer to the current object
+  // var userChosenColour = this.id;
+  var userChosenColour = $(this).attr("id");
+  userClickedPattern.push(userChosenColour);
+  // console.log(userClickedPattern);
+})
