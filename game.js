@@ -9,8 +9,7 @@ function nextSequence() {
   gamePattern.push(randomChosenColour);
   // Jquery to select id $("#idName")
   $("#" + randomChosenColour).fadeOut().fadeIn();
-  var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
-  audio.play();
+  playSound(randomChosenColour);
 }
 
 // Use jQuery to trigger a call back function when a button is clicked and store the id
@@ -25,4 +24,13 @@ $(".btn").click(function() {
   var userChosenColour = $(this).attr("id");
   userClickedPattern.push(userChosenColour);
   // console.log(userClickedPattern);
+
+  //Play sound correspomding to the colour
+  playSound(userChosenColour);
 })
+
+
+function playSound(name){
+  var audio = new Audio("sounds/" + name + ".mp3");
+  audio.play();
+}
