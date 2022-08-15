@@ -5,7 +5,7 @@ var gamePattern = [];
 var userClickedPattern = [];
 
 function nextSequence() {
-  userClickedPattern=[]
+  userClickedPattern = []
 
   var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColour = buttonColours[randomNumber];
@@ -74,14 +74,26 @@ function checkAnswer(currentLevel) {
     // console.log(userClickedPattern);
 
     //When user has finished the sequence then call next sequence after 100 ms
-    if(gamePattern.length===userClickedPattern.length){
-      setInterval(nextSequence(),100);
+    if (gamePattern.length === userClickedPattern.length) {
+      setInterval(nextSequence(), 100);
     }
   } else {
     // console.log("Wrong");
-    // Reset the h1 text,level
-    $("#level-title").text("Press A Key to Start");
-    level=0;
-    isStarted = false;
+
+    $("body").addClass("game-over");
+    playSound("wrong"); //play this sound if answer is wrong
+    setInterval(function() {
+      $("body").removeClass("game-over");
+    }, 200);
+    $("#level-title").text("Game Over, Press A Key to Start");
+    startOver();
   }
+}
+
+//Restart the game
+function startOver() {
+  // Reset the h1 text,level
+  gamePattern=[];
+  level = 0;
+  isStarted = false;
 }
